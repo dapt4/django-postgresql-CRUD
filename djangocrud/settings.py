@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from os.path import join, dirname
+from dotenv import load_dotenv
+
+dotenv_path = join(dirname(__file__),'../.env')
+load_dotenv(dotenv_path)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -77,11 +83,11 @@ WSGI_APPLICATION = 'djangocrud.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'tasksdb',
-        'USER': 'postgres',
-        'PASSWORD':'19570744',
-        'HOST':'localhost',
-        'PORT': '5432'
+        'NAME': os.environ.get('ENV_NAME'),
+        'USER': os.environ.get('ENV_USER'),
+        'PASSWORD': os.environ.get('ENV_PASSWORD'),
+        'HOST': os.environ.get('ENV_HOST'),
+        'PORT': os.environ.get('ENV_PORT')
     }
 }
 
